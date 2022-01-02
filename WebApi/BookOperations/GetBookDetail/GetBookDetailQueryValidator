@@ -1,0 +1,18 @@
+using System;
+using FluentValidation;
+using WebApi.BookOperations.GetBookDetail;
+
+namespace WebApi.BookOperation.GetBookDetail{
+    public class GetBookDetailQueryValidator : AbstractValidator<GetBookDetailQuery>
+    {
+        public GetBookDetailQueryValidator()
+        {
+            RuleFor(query=>query.Model.GenreId).GreaterThan(0);
+            RuleFor(query=> query.Model.PageCount).GreaterThan(0);
+            RuleFor(query=>query.Model.PublishDate).NotEmpty().LessThan(DateTime.Now.Date);
+            RuleFor(query=> query.Model.Title).NotEmpty().MinimumLength(4);
+            
+        }
+
+    }
+}
